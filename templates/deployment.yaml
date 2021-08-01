@@ -2,14 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: python-helloworld
-  name: python-helloworld
-  namespace: default 
+    app: {{ .Values.name }}
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }} 
 spec:
-  replicas: 3
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: python-helloworld
+      app: {{ .Values.name }}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -18,12 +18,12 @@ spec:
   template:
     metadata:
       labels:
-        app: python-helloworld
+        app: {{ .Values.name }}
     spec:
       containers:
-      - image: artiomcarabas/python-helloworld:latest 
+      - image: {{ .Values.image.repo }}:{{.Values.image.tag}} 
         imagePullPolicy: IfNotPresent
-        name: python-helloworld
+        name: {{ .Values.name }}
         resources:
           requests:
             cpu: 50m

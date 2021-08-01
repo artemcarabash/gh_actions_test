@@ -1,0 +1,8 @@
+namespace: default
+name: python-helloworld
+ 
+image:
+  repo: artiomcarabas/python-helloworld 
+  tag: latest
+
+replicaCount: 3
